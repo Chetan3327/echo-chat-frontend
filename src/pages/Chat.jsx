@@ -6,6 +6,7 @@ import ChatWindow from '../components/ChatWindow'
 import Contact from '@/components/contact/Contact'
 import Setting from '@/components/setting/Setting'
 import Group from '@/components/group/Group'
+import Info from '@/components/Info/Info'
 const Chat = () => {
   const [activeTab, setActiveTab] = useState('chat')
   const [small, setSmall] = useState(true)
@@ -19,8 +20,9 @@ const Chat = () => {
           {activeTab === 'contact' && (<Contact setActiveTab={setActiveTab} />)}
           {activeTab === 'setting' && (<Setting />)}
           {activeTab === 'group' && (<Group setActiveTab={setActiveTab} />)}
+          {activeTab === 'info' && (<Info />)}
           {/* <Contact /> */}
-          <ChatWindow />
+          <ChatWindow activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </div>
     </div>

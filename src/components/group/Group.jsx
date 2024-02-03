@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import ProfileIcon from '../ProfileIcon'
 import axios from 'axios'
 import { ChatContext } from '@/context/userContext'
-import { IoSearchOutline } from "react-icons/io5";
+import { IoCloseOutline, IoSearchOutline } from "react-icons/io5";
 
 const ChatItem = ({item, addUser}) => {
   return (
@@ -19,8 +19,8 @@ const ChatItem = ({item, addUser}) => {
   )
 }
 
-const UserItem = ({item}) => {
-  return (<span className='flex items-center gap-2 bg-graybg p-2 rounded-sm'><ProfileIcon name={item?.name} />{item?.name}</span>)
+const UserItem = ({item, removeUser}) => {
+  return (<span className='flex items-center gap-2 bg-graybg p-2 rounded-sm'><ProfileIcon name={item?.name} />{item?.name} <IoCloseOutline className='cursor-pointer' onClick={() => removeUser(item?._id)} /></span>)
 }
 
 const Group = ({setActiveTab}) => {
@@ -58,6 +58,11 @@ const Group = ({setActiveTab}) => {
       setUsers((users) => [...users, usertoadd]);
     }
   }
+
+  const removeUser = (usertoremove) => {
+    const filteredUsers = users.filter((user) => user._id !== usertoremove)
+    setUsers(filteredUsers)
+  }
   return (
     <div className='bg-primary w-[30%] rounded-lg border border-primary'>
 
@@ -71,7 +76,7 @@ const Group = ({setActiveTab}) => {
         {users?.length > 0 && 
         (<div className='flex gap-3 flex-wrap'>
           {users.map((item) => {
-            return(<UserItem key={item._id} item={item} />)
+            return(<UserItem key={item._id} item={item} removeUser={removeUser} />)
           })}
         </div>)}
 
