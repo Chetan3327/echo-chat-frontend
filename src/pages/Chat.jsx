@@ -15,7 +15,7 @@ const Chat = () => {
         <NavBar />
         <div className='flex w-full h-full gap-5'>
           {activeTab === 'chat' && (<Inbox />)}
-          {activeTab === 'contact' && (<Contact />)}
+          {activeTab === 'contact' && (<Contact setActiveTab={setActiveTab} />)}
           {activeTab === 'setting' && (<Setting />)}
           {/* <Contact /> */}
           <ChatWindow />

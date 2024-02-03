@@ -4,10 +4,10 @@ import axios from 'axios'
 import { ChatContext } from '@/context/userContext'
 import { IoSearchOutline } from "react-icons/io5";
 
-const ChatItem = ({pic, name, email}) => {
+const ChatItem = ({pic, name, email, userId, accessChat}) => {
   return (
     <>
-      <div className='flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer'>
+      <div onClick={() => accessChat(userId)} className='flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer'>
         <ProfileIcon name={name} />
         <div>
           <span>{name}</span>
@@ -19,8 +19,8 @@ const ChatItem = ({pic, name, email}) => {
   )
 }
 
-const Contact = () => {
-  const {user, token} = useContext(ChatContext)
+const Contact = ({setActiveTab}) => {
+  const {user, token, setSelectedChat, chats, setChats} = useContext(ChatContext)
   const [searchTerm, setSearchTerm] = useState('')
   const [userList, setUserList] = useState(null)
   const findUsers = () => {
@@ -30,6 +30,16 @@ const Contact = () => {
     axios.get(`http://localhost:5000/api/user?search=${searchTerm}`, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
       // console.log(response)
       setUserList(response.data)
+    })
+  }
+  const accessChat = (userId) => {
+    axios.post(`http://localhost:5000/api/chat`, {userId}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
+      console.log(response)
+      // setUserList(response.data)
+      if(!chats.find((c) => c._id === response.data._id)) setChats([response.data, ...chats])
+      
+      setSelectedChat(response.data)
+      setActiveTab('chat')
     })
   }
   return (
@@ -47,7 +57,7 @@ const Contact = () => {
       {userList?.length > 0 ?
       (<div className='mt-5'>
         {userList.map((item, idx) => {
-          return (<ChatItem key={item._id} name={item.name} email={item.email} />)
+          return (<ChatItem key={item._id} name={item.name} email={item.email} userId={item._id} accessChat={accessChat} />)
         })}
       </div>):
       (<p className='flex justify-center mt-5'>{!userList ? 'Search Friends!' : 'No user found!'}</p>)}

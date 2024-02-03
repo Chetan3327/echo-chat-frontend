@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import ProfileIcon from './ProfileIcon'
+import { ChatContext } from '@/context/userContext'
+import axios from 'axios'
 
-const ChatItem = () => {
+const senderName = (users, user) => {
+  if(users[0]._id === user._id){
+    return users[1].name
+  }
+  return users[0].name
+}
+
+const ChatItem = ({chat, user, setSelectedChat, active}) => {
   return (
     <>
-      <div className='flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer'>
+      <div onClick={() => setSelectedChat(chat)} className={`${active ? 'bg-graybg': ''} flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer`}>
         <ProfileIcon />
         <div>
-          <span>Chetan Chauhan</span>
+          <span>{chat.isGroupChat ? chat.chatName : senderName(chat.users, user)}</span>
           <p className='text-sm text-gray-100'>Hi.</p>
         </div>
       </div>
@@ -17,6 +26,17 @@ const ChatItem = () => {
 }
 
 const Inbox = () => {
+  const {user, token, chats, setChats, selectedChat, setSelectedChat} = useContext(ChatContext)
+  console.log(selectedChat)
+  console.log(chats)
+  const fetchChats = async () => {
+    const {data} = await axios.get('http://localhost:5000/api/chat', {headers: {'Authorization' :`Bearer ${token}`}})
+    console.log(data)
+    setChats(data)
+  }
+  useEffect(() => {
+    if(token) fetchChats()
+  }, [token])
   return (
     <div className='bg-primary w-[30%] rounded-lg border border-primary'>
 
@@ -30,12 +50,12 @@ const Inbox = () => {
         <button className='w-full py-1 cursor-pointer'>Archived</button>
       </div>
 
-      <div>
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-      </div>
+      {chats && 
+      (<div>
+        {chats.map((chat) => {
+          return (<ChatItem key={chat._id} chat={chat} user={user} active={selectedChat?._id === chat._id} setSelectedChat={setSelectedChat} />)
+        })}
+      </div>)}
     </div>
   )
 }

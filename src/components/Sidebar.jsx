@@ -9,10 +9,10 @@ const SideBarItem = ({name, icon: IconComponent, active, small, setActiveTab}) =
   return <span onClick={() => setActiveTab(name.toLowerCase())} className={`${active ? 'border-l-4' : ''} px-5 py-3 flex gap-3 items-center cursor-pointer ${small ? 'justify-center' : ''} hover:bg-gray-900 hover:duration-300`}>{IconComponent} {small ? '' : name}</span>
 }
 
-const SideBarTitle = ({small, name="John Doe"}) => {
+const SideBarTitle = ({small, name="chetan"}) => {
   return(
     <div className='px-5 flex gap-4 py-10 items-center'>
-      <ProfileIcon />
+      <ProfileIcon name={name} />
       {!small && <span className='font-semibold'>Hi, {name}</span>}
     </div>
   )
