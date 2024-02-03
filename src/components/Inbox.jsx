@@ -20,16 +20,16 @@ const ChatItem = () => {
 
 const Inbox = () => {
   return (
-    <div className='bg-primary w-[30%] rounded-lg'>
+    <div className='bg-primary w-[30%] rounded-lg border border-primary'>
 
       <div className='flex gap-3 px-5 py-5 items-baseline'>
         <h3 className='font-semibold text-xl'>Inbox</h3>
         <span className='bg-destructive px-2 rounded-md text-sm'>3 New</span>
       </div>
 
-      <div className='flex mx-5 mb-4 py-2 px-2 gap-4 justify-around items-center bg-[#282b34] text-accent'>
-        <span className='cursor-pointer bg-[#3b3e46] px-4 rounded-sm'>Primary</span>
-        <span className='cursor-pointer px-4'>Archived</span>
+      <div className='flex mx-5 mb-4 py-1 px-1 gap-4 justify-around items-center bg-[#282b34] text-accent'>
+        <button className='w-full py-1 cursor-pointer bg-[#3b3e46] rounded-sm'>Primary</button>
+        <button className='w-full py-1 cursor-pointer'>Archived</button>
       </div>
 
       <div>

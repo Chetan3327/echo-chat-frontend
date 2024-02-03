@@ -3,6 +3,7 @@ import ProfileIcon from './ProfileIcon'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { LiaCheckDoubleSolid } from "react-icons/lia";
+import { LuSendHorizonal } from "react-icons/lu";
 
 const ChatHeader = () => {
   return(
@@ -17,9 +18,9 @@ const ChatHeader = () => {
       </div>
 
       <div className='px-5 py-2 flex gap-5'>
-        <button className='bg-[#3b3e46] p-2 px-3 rounded-md'>call</button>
-        <button className='bg-[#3b3e46] p-2 px-3 rounded-md'>call</button>
-        <button className='bg-[#3b3e46] p-2 px-3 rounded-md'>call</button>
+        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'>call</button>
+        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'>call</button>
+        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'>call</button>
       </div>
 
     </div>
@@ -29,10 +30,10 @@ const ChatHeader = () => {
 const Controls = () => {
   return (
     <div className='flex gap-2 items-center'>
-      <Input type="text" className="bg-primary py-5" placeholder="Write message" />
+      <input type="text" className="bg-primary w-full p-1.5 outline-none px-2 rounded-md" placeholder="Write message" />
       <Button variant="primary">File</Button>
       <Button variant="primary">Audio</Button>
-      <Button>send</Button>
+      <Button><LuSendHorizonal size={20} /></Button>
     </div>
   )
 }
