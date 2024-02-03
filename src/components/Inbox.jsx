@@ -5,9 +5,7 @@ const ChatItem = () => {
   return (
     <>
       <div className='flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer'>
-        <div>
-          <ProfileIcon />
-        </div>
+        <ProfileIcon />
         <div>
           <span>Chetan Chauhan</span>
           <p className='text-sm text-gray-100'>Hi.</p>

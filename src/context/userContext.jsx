@@ -9,8 +9,8 @@ const ChatContextProvider = (props) => {
     const navigate = useNavigate()
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-        setUser(userInfo.user)
-        setToken(userInfo.token)
+        setUser(userInfo?.user)
+        setToken(userInfo?.token)
 
         if(!userInfo){
             navigate('/')

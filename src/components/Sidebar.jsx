@@ -6,7 +6,7 @@ import Logout from './auth/Logout';
 import { ChatContext } from '@/context/userContext';
 
 const SideBarItem = ({name, icon: IconComponent, active, small, setActiveTab}) => {
-  return <span onClick={() => setActiveTab(name.toLowerCase())} className={`${active ? 'border-l-4' : ''} px-5 py-3 flex gap-3 items-center cursor-pointer hover:bg-gray-900 hover:duration-300`}>{IconComponent} {small ? '' : name}</span>
+  return <span onClick={() => setActiveTab(name.toLowerCase())} className={`${active ? 'border-l-4' : ''} px-5 py-3 flex gap-3 items-center cursor-pointer ${small ? 'justify-center' : ''} hover:bg-gray-900 hover:duration-300`}>{IconComponent} {small ? '' : name}</span>
 }
 
 const SideBarTitle = ({small, name="John Doe"}) => {
@@ -18,10 +18,10 @@ const SideBarTitle = ({small, name="John Doe"}) => {
   )
 }
 
-const ToogleButton = ({small}) => {
+const ToogleButton = ({small, setSmall}) => {
   return(
     <div className='flex justify-end'>
-      <span className='bg-[#4e515a] p-1.5 cursor-pointer text-sm rounded-md shadow-md hover:bg-[#3b3e46] hover:duration-300'>
+      <span onClick={() => setSmall(!small)} className='bg-[#4e515a] p-1.5 cursor-pointer text-sm rounded-md shadow-md hover:bg-[#3b3e46] hover:duration-300'>
         {small ? <IoChevronForward /> : <IoChevronBackOutline />}
       </span>
     </div>
@@ -36,7 +36,7 @@ const SideBarItems = [
   {name: "Setting", icon: <IoSettingsOutline size={20} />, active: false},
 ]
 
-const Sidebar = ({small = false, setActiveTab, activeTab}) => {
+const Sidebar = ({small = false, setSmall, setActiveTab, activeTab}) => {
   const {user} = useContext(ChatContext)
   // console.log(user)
   return (
@@ -50,7 +50,7 @@ const Sidebar = ({small = false, setActiveTab, activeTab}) => {
         
       </div>
       <div className='pb-5'>
-        <ToogleButton small={small} />
+        <ToogleButton small={small} setSmall={setSmall} />
         <Logout small={small} />
       </div>
     </div>

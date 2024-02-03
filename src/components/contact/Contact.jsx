@@ -2,14 +2,13 @@ import React, { useContext, useState } from 'react'
 import ProfileIcon from '../ProfileIcon'
 import axios from 'axios'
 import { ChatContext } from '@/context/userContext'
+import { IoSearchOutline } from "react-icons/io5";
 
 const ChatItem = ({pic, name, email}) => {
   return (
     <>
       <div className='flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer'>
-        <div>
-          <ProfileIcon />
-        </div>
+        <ProfileIcon name={name} />
         <div>
           <span>{name}</span>
           <p className='text-sm text-gray-100'>{email}</p>
@@ -42,18 +41,13 @@ const Contact = () => {
       </div>
       <div className='w-full flex gap-2 px-3'>
         <input onChange={(e) => setSearchTerm(e.target.value)} className='w-full bg-secondary text-gray-300 outline-none p-1 rounded-md' type="text" placeholder='Enter name or email' />
-        <button className='bg-accent px-4 p-1 rounded-md hover:bg-accent/90' onClick={() => findUsers()}>Search</button>
+        <button className='bg-accent px-2 p-1 rounded-md hover:bg-accent/90' onClick={() => findUsers()}><IoSearchOutline /></button>
       </div>
-
-      {/* <div className='flex mx-5 mb-4 py-1 px-1 gap-4 justify-around items-center bg-[#282b34] text-accent'>
-        <button className='w-full py-1 cursor-pointer bg-[#3b3e46] rounded-sm'>Primary</button>
-        <button className='w-full py-1 cursor-pointer'>Archived</button>
-      </div> */}
 
       {userList?.length > 0 ?
       (<div className='mt-5'>
         {userList.map((item, idx) => {
-          return (<ChatItem name={item.name} email={item.email} />)
+          return (<ChatItem key={item._id} name={item.name} email={item.email} />)
         })}
       </div>):
       (<p className='flex justify-center mt-5'>{!userList ? 'Search Friends!' : 'No user found!'}</p>)}

@@ -4,6 +4,8 @@ import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { LiaCheckDoubleSolid } from "react-icons/lia";
 import { LuSendHorizonal } from "react-icons/lu";
+import { IoVideocamOutline, IoCallOutline, IoCloseOutline, IoAttachOutline, IoMicOutline } from "react-icons/io5";
+import { IoIosSend } from 'react-icons/io';
 
 const ChatHeader = () => {
   return(
@@ -18,9 +20,9 @@ const ChatHeader = () => {
       </div>
 
       <div className='px-5 py-2 flex gap-5'>
-        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'>call</button>
-        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'>call</button>
-        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'>call</button>
+        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'><IoVideocamOutline size={20} /></button>
+        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'><IoCallOutline size={20} /></button>
+        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'><IoCloseOutline size={20} /></button>
       </div>
 
     </div>
@@ -31,9 +33,9 @@ const Controls = () => {
   return (
     <div className='flex gap-2 items-center'>
       <input type="text" className="bg-primary w-full p-1.5 outline-none px-2 rounded-md" placeholder="Write message" />
-      <Button variant="primary">File</Button>
-      <Button variant="primary">Audio</Button>
-      <Button><LuSendHorizonal size={20} /></Button>
+      <Button variant="primary"><IoAttachOutline size={20} /></Button>
+      <Button variant="primary"><IoMicOutline size={20} /></Button>
+      <Button><IoIosSend size={20} /></Button>
     </div>
   )
 }

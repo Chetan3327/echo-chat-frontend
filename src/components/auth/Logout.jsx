@@ -10,7 +10,11 @@ const Logout = ({small}) => {
         navigate('/')
     }
     return (
-        <span onClick={() => handleLogout()} className='px-5 py-3 flex gap-2 items-center cursor-pointer mt-5'><IoLogOutOutline size={20} />{!small && 'Logout'}</span>
+        <div className={`px-5 py-3 flex gap-2 items-center ${small ? 'justify-center' : ''} mt-5`}>
+            <span className='flex items-center gap-2 cursor-pointer' onClick={() => handleLogout()}>
+                <IoLogOutOutline size={20} />{!small && 'Logout'}
+            </span>
+        </div>
     )
 }
 
