@@ -5,6 +5,7 @@ import Inbox from '../components/Inbox'
 import ChatWindow from '../components/ChatWindow'
 import Contact from '@/components/contact/Contact'
 import Setting from '@/components/setting/Setting'
+import Group from '@/components/group/Group'
 const Chat = () => {
   const [activeTab, setActiveTab] = useState('chat')
   const [small, setSmall] = useState(true)
@@ -17,6 +18,7 @@ const Chat = () => {
           {activeTab === 'chat' && (<Inbox />)}
           {activeTab === 'contact' && (<Contact setActiveTab={setActiveTab} />)}
           {activeTab === 'setting' && (<Setting />)}
+          {activeTab === 'group' && (<Group setActiveTab={setActiveTab} />)}
           {/* <Contact /> */}
           <ChatWindow />
         </div>

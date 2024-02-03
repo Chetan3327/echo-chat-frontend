@@ -45,9 +45,9 @@ const Contact = ({setActiveTab}) => {
   return (
     <div className='bg-primary w-[30%] rounded-lg border border-primary'>
 
-      <div className='flex gap-3 px-5 py-5 items-baseline'>
+      <div className='flex gap-3 px-5 py-5 items-start justify-between'>
         <h3 className='font-semibold text-xl'>Contact</h3>
-        {/* <span className='bg-destructive px-2 rounded-md text-sm'>3 New</span> */}
+        <button onClick={() => setActiveTab('group')} className='bg-accent px-4 p-1.5 rounded-md text-sm hover:bg-accent/90'>New Group</button>
       </div>
       <div className='w-full flex gap-2 px-3'>
         <input onChange={(e) => setSearchTerm(e.target.value)} className='w-full bg-secondary text-gray-300 outline-none p-1 rounded-md' type="text" placeholder='Enter name or email' />
