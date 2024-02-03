@@ -53,7 +53,7 @@ const Inbox = () => {
       {chats && 
       (<div>
         {chats.map((chat) => {
-          return (<ChatItem key={chat._id} chat={chat} user={user} active={selectedChat?._id === chat._id} setSelectedChat={setSelectedChat} />)
+          return (<ChatItem key={chat._id} chat={chat} user={user} active={selectedChat?._id === chat?._id} setSelectedChat={setSelectedChat} />)
         })}
       </div>)}
     </div>

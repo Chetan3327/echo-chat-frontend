@@ -82,7 +82,7 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
         </div>
       </>):
       (<div className='flex justify-center items-center h-full'>
-        <img src="https://img.logoipsum.com/247.svg" alt="Logo" />
+        <img src="https://img.logoipsum.com/245.svg" alt="Logo" />
       </div>)}   
     </div>
   )

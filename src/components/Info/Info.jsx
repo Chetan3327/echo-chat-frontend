@@ -22,15 +22,18 @@ const getSenderUser = (users, user) => {
   return users[0]
 }
 
-const ChatItem = ({pic, name, email, userId}) => {
+const ChatItem = ({pic, name, email, userId, adminId}) => {
   return (
     <>
-      <div className='flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer'>
-        <ProfileIcon name={name} />
-        <div>
-          <span>{name}</span>
-          <p className='text-sm text-gray-100'>{email}</p>
+      <div className='flex items-center justify-between px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer'>
+        <div className='flex gap-5 items-center'>
+          <ProfileIcon name={name} />
+          <div>
+            <span>{name}</span>
+            <p className='text-sm text-gray-100'>{email}</p>
+          </div>
         </div>
+        {userId === adminId && (<span className='text-sm text-gray-400'>Admin</span>)}
       </div>
       <hr className='h-px bg-gray-700 border-0 dark:bg-gray-700' />
     </>
@@ -56,7 +59,7 @@ const Info = () => {
         <div className='mt-5 border-t border-gray-700 pt-5'>
           <span className='pl-3'>Participants</span>
           {selectedChat.users.map((item) => {
-            return (<ChatItem key={item._id} name={item.name} email={item.email} userId={item._id} />)
+            return (<ChatItem key={item._id} name={item.name} email={item.email} userId={item._id} adminId={selectedChat.groupAdmin._id} />)
           })}
         </div>
       </div>
