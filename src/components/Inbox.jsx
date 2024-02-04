@@ -12,13 +12,14 @@ const senderName = (users, user) => {
 
 const ChatItem = ({chat, user, setSelectedChat, selectedChat}) => {
   const active = selectedChat ? (selectedChat._id === chat._id): false;
+  const latestMessageContent = chat.latestMessage ? (chat.isGroupChat ? chat.latestMessage.sender.name + ': ' + chat.latestMessage.content : chat.latestMessage.content) : '';
   return (
     <>
       <div onClick={() => setSelectedChat(chat)} className={`${active ? 'bg-graybg': ''} flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer`}>
         <ProfileIcon />
         <div>
           <span>{chat.isGroupChat ? chat.chatName : senderName(chat.users, user)}</span>
-          <p className='text-sm text-gray-100'>Hi.</p>
+          <p className='text-sm text-gray-300'>{latestMessageContent}</p>
         </div>
       </div>
       <hr className='h-px bg-gray-700 border-0 dark:bg-gray-700' />
@@ -28,11 +29,8 @@ const ChatItem = ({chat, user, setSelectedChat, selectedChat}) => {
 
 const Inbox = () => {
   const {user, token, chats, setChats, selectedChat, setSelectedChat} = useContext(ChatContext)
-  console.log(selectedChat)
-  console.log(chats)
   const fetchChats = async () => {
     const {data} = await axios.get('http://localhost:5000/api/chat', {headers: {'Authorization' :`Bearer ${token}`}})
-    console.log(data)
     setChats(data)
   }
   useEffect(() => {

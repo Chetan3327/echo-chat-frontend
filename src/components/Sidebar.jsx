@@ -9,11 +9,11 @@ const SideBarItem = ({name, icon: IconComponent, active, small, setActiveTab}) =
   return <span onClick={() => setActiveTab(name.toLowerCase())} className={`${active ? 'border-l-4' : ''} px-5 py-3 flex gap-3 items-center cursor-pointer ${small ? 'justify-center' : ''} hover:bg-gray-900 hover:duration-300`}>{IconComponent} {small ? '' : name}</span>
 }
 
-const SideBarTitle = ({small, name="chetan"}) => {
+const SideBarTitle = ({small, user, setActiveTab}) => {
   return(
     <div className='px-5 flex gap-4 py-10 items-center'>
-      <ProfileIcon name={name} />
-      {!small && <span className='font-semibold'>Hi, {name}</span>}
+      {user && (<span onClick={() => setActiveTab('setting')} className='cursor-pointer flex'><ProfileIcon name={user.name} /></span>)}
+      {!small && <span className='font-semibold'>{user.name}</span>}
     </div>
   )
 }
@@ -40,9 +40,9 @@ const Sidebar = ({small = false, setSmall, setActiveTab, activeTab}) => {
   const {user} = useContext(ChatContext)
   // console.log(user)
   return (
-    <div className={`flex flex-col bg-primary ${small ? 'w-[5vw]' : 'w-[20vw]'} rounded-lg justify-between`}>
+    <div className={`flex flex-col bg-primary ${small ? 'w-[5vw]' : 'w-[20vw]'} rounded-lg justify-between duration-500`}>
       <div>
-        <SideBarTitle small={small} name={user?.name} />
+        <SideBarTitle small={small} user={user} setActiveTab={setActiveTab} />
         
         {SideBarItems.map((item, idx) => {
           return (<SideBarItem key={idx} small={small} name={item.name} icon={item.icon} active={item.name.toLowerCase() === activeTab} setActiveTab={setActiveTab} />)

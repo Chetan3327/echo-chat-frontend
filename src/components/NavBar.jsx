@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaPlus } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import ProfileIcon from './ProfileIcon';
-const NavBar = () => {
+import { ChatContext } from '@/context/userContext';
+const NavBar = ({setActiveTab}) => {
+  const {user} = useContext(ChatContext)
   return (
     <div className='bg-primary flex justify-between p-3 px-5 rounded-lg items-center'>
 
@@ -14,7 +16,9 @@ const NavBar = () => {
           <span className=' cursor-pointer'>
             <IoMdNotificationsOutline size={25} />
           </span>
-          <ProfileIcon />
+
+          {user && (<span onClick={() => setActiveTab('setting')} className='cursor-pointer flex'><ProfileIcon name={user.name} /></span>)}
+
         </div>
 
     </div>

@@ -14,7 +14,7 @@ const Chat = () => {
     <div className='flex min-h-screen bg-secondary text-white p-5 gap-5'>
       <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} small={small} setSmall={setSmall} />
       <div className='w-full flex flex-col gap-5'>
-        <NavBar />
+        <NavBar setActiveTab={setActiveTab} />
         <div className='flex w-full h-full gap-5'>
           {activeTab === 'chat' && (<Inbox />)}
           {activeTab === 'contact' && (<Contact setActiveTab={setActiveTab} />)}

@@ -1,18 +1,17 @@
-CRITICAL
-on fresh login, chat item error ._id is undefined
-
 MESSAGES
-scroll messages
 typing...
+user detail in messages
 
 GROUPS
-rename groups
 add or remove participants
 
 MISC
 update profile
+name for this website
 
 EXPLORE
 explore tab
 feed
 stories
+
+CALLS

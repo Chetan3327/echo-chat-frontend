@@ -1,7 +1,9 @@
 import { ChatContext } from '@/context/userContext'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import ProfileIcon from '../ProfileIcon'
 import { IoChevronBackOutline } from 'react-icons/io5'
+import { FaEdit } from 'react-icons/fa'
+import axios from 'axios'
 
 const SettingItem = ({info, value}) => {
   return (
@@ -42,8 +44,20 @@ const ChatItem = ({pic, name, email, userId, adminId}) => {
 }
 
 const Info = ({setActiveTab}) => {
-  const {user, selectedChat} = useContext(ChatContext)
-  console.log('selectedChat')
+  const {user, token, selectedChat, setSelectedChat} = useContext(ChatContext)
+  const [updatingName, setUpdateingName] = useState(false)
+  const [newGroupName, setnewGroupName] = useState(selectedChat.chatName)
+  const admin = user._id === selectedChat.groupAdmin._id
+  console.log('admin', admin)
+
+  const renameGroup = () => {
+    if(!newGroupName) return
+    axios.put(`http://localhost:5000/api/chat/renameGroup`, {chatId: selectedChat._id, newGroupName}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
+      console.log(response)
+      setSelectedChat(response.data)
+      setUpdateingName(false)
+    })
+  }
   console.log(selectedChat)
   if(selectedChat.isGroupChat){
     return(
@@ -55,15 +69,33 @@ const Info = ({setActiveTab}) => {
         <div className='flex justify-center'>
           <ProfileIcon name={selectedChat?.chatName} />
         </div>
-        <div>
-          <SettingItem info='Name' value={selectedChat?.chatName} />
+
+        <div className='flex gap-5 items-center px-5 py-1'>
+          <div>
+            <span className='text-sm text-gray-100'>Name</span>
+            {!updatingName ? 
+            (<p className='flex gap-2 items-center'>{selectedChat?.chatName}<span onClick={() => setUpdateingName(true)} className='text-sm cursor-pointer text-gray-300'><FaEdit /></span></p>) : 
+            (<div className='w-full flex gap-2'>
+              <input value={newGroupName} onChange={(e) => setnewGroupName(e.target.value)} className='w-full bg-secondary text-gray-300 outline-none p-0.5 px-1 rounded-md' autoFocus type="text" />
+              <button onClick={() => renameGroup()} className='bg-accent px-2 p-1 rounded-md hover:bg-accent/90'>update</button>
+            </div>)}
+            
+            
+          </div>
         </div>
+
         <div className='mt-5 border-t border-gray-700 pt-5'>
           <span className='pl-3'>Participants</span>
           {selectedChat.users.map((item) => {
             return (<ChatItem key={item._id} name={item.name} email={item.email} userId={item._id} adminId={selectedChat.groupAdmin._id} />)
           })}
         </div>
+
+        {admin && 
+        (<div className='mt-5'>
+          <span className='pl-3'>Manage Participants</span>
+          
+        </div>)}
       </div>
     )
   }else{

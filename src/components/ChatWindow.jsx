@@ -46,12 +46,13 @@ const ChatHeader = ({selectedChat, user, activeTab, setActiveTab}) => {
   )
 }
 
-const Message = ({content, left}) => {
+const Message = ({content, left, time}) => {
+  const timeString = new Date(time).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
   return (
     <div className={`px-5 py-2 my-1 flex ${left ? 'justify-start' : 'justify-end'}`}>
-      <div className={`flex flex-col gap-0 ${left ? 'items-start' : 'items-end'}`}>
+      <div className={`flex flex-col gap-1 ${left ? 'items-start' : 'items-end'}`}>
         <span className='bg-primary px-5 py-2 rounded-sm'>{content}</span>
-        <span className='text-sm text-gray-300 flex gap-2 items-center pl-2'>14:12 <span className='text-accent'><LiaCheckDoubleSolid /></span></span>
+        <span className='text-sm text-gray-300 flex gap-2 items-center pl-2'>{timeString} <span className='text-accent'><LiaCheckDoubleSolid /></span></span>
       </div>
     </div>
   )
@@ -149,9 +150,9 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
         <ChatHeader activeTab={activeTab} setActiveTab={setActiveTab} selectedChat={selectedChat} user={user} />
         <div className='bg-[#3b3e46] h-full rounded-lg p-5 flex flex-col justify-between'>
           {messages.length > 0 ? 
-          (<div className='mb-4 h-full'>
+          (<div className='mb-4 overflow-auto h-[29.5rem] no-scrollbar'>
             {messages.map((message) => {
-              return (<Message key={message._id} content={message.content} left={message.sender._id != user._id} />)
+              return (<Message key={message._id} content={message.content} left={message.sender._id != user._id} time={message.updatedAt} />)
             })}
           </div>):(<div className='flex justify-center items-center h-full text-gray-300'>No messages</div>)}
 

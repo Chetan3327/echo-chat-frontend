@@ -8,7 +8,7 @@ const ChatContextProvider = (props) => {
     const [user, setUser] = useState(null)
     const [token, setToken] = useState(null)
     const [selectedChat, setSelectedChat] = useState(null)
-    const [chats, setChats] = useState([])
+    const [chats, setChats] = useState(null)
     const navigate = useNavigate()
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
