@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import ProfileIcon from './ProfileIcon'
-import { Button } from './ui/button'
 import { LiaCheckDoubleSolid } from "react-icons/lia";
 import { IoVideocamOutline, IoCallOutline, IoCloseOutline, IoAttachOutline, IoMicOutline, IoOptionsOutline } from "react-icons/io5";
 import { IoIosSend } from 'react-icons/io';
@@ -77,7 +76,17 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
   const [socketConnected, setSocketConnected] = useState(false)
-  console.log(socketConnected)
+  const messagesContainerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const fetchMessages = async () => {
     if(!selectedChat) return
@@ -150,7 +159,7 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
         <ChatHeader activeTab={activeTab} setActiveTab={setActiveTab} selectedChat={selectedChat} user={user} />
         <div className='bg-[#3b3e46] h-full rounded-lg p-5 flex flex-col justify-between'>
           {messages.length > 0 ? 
-          (<div className='mb-4 overflow-auto h-[29.5rem] no-scrollbar'>
+          (<div className='mb-4 overflow-auto h-[29.5rem] no-scrollbar' ref={messagesContainerRef}>
             {messages.map((message) => {
               return (<Message key={message._id} content={message.content} left={message.sender._id != user._id} time={message.updatedAt} />)
             })}
