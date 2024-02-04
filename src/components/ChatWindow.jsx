@@ -6,6 +6,7 @@ import { IoVideocamOutline, IoCallOutline, IoCloseOutline, IoAttachOutline, IoMi
 import { IoIosSend } from 'react-icons/io';
 import { ChatContext } from '@/context/userContext';
 import axios from 'axios';
+import io from 'socket.io-client'
 
 const senderName = (users, user) => {
   if(users[0]._id === user._id){
@@ -48,7 +49,7 @@ const ChatHeader = ({selectedChat, user, activeTab, setActiveTab}) => {
 const Message = ({content, left}) => {
   return (
     <div className={`px-5 py-2 my-1 flex ${left ? 'justify-start' : 'justify-end'}`}>
-      <div className='flex flex-col items-end gap-0'>
+      <div className={`flex flex-col gap-0 ${left ? 'items-start' : 'items-end'}`}>
         <span className='bg-primary px-5 py-2 rounded-sm'>{content}</span>
         <span className='text-sm text-gray-300 flex gap-2 items-center pl-2'>14:12 <span className='text-accent'><LiaCheckDoubleSolid /></span></span>
       </div>
@@ -67,10 +68,15 @@ const Controls = ({newMessage, handleMessageInput, handleKeyDown, sendMessage}) 
   )
 }
 
+const BACKEND_URL = 'http://localhost:5000'
+var socket, selectedChatCompare;
+
 const ChatWindow = ({activeTab, setActiveTab}) => {
   const {user, selectedChat, token} = useContext(ChatContext)
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
+  const [socketConnected, setSocketConnected] = useState(false)
+  console.log(socketConnected)
 
   const fetchMessages = async () => {
     if(!selectedChat) return
@@ -79,15 +85,39 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
       setMessages(data)      
       console.log('chat messages: ')
       console.log(data)
+
+      socket.emit('join chat', selectedChat._id)
     } catch (error) {
       console.log(error)
       console.log('error loading messages')
     }
   }
+  useEffect(() => {
+    socket = io(BACKEND_URL)
+    console.log('io client conncted')
+    console.log('user', user)
+    socket.emit('setup', user)
+    socket.on('connected', () => {
+      setSocketConnected(true)
+    })
 
+  }, [user])
+  
   useEffect(() => {
     fetchMessages()
+    selectedChatCompare = selectedChat
   }, [selectedChat])
+
+  useEffect(() => {
+    socket.on('message recieved', (newMessageRecieved) => {
+      if(!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id){
+        // give notification
+      }else{
+        setMessages([...messages, newMessageRecieved])
+      }
+    })
+  })
+
 
   const sendMessage = async () => {
     console.log('send message')
@@ -96,6 +126,7 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
       const {data} = await axios.post(`http://localhost:5000/api/message`, {content: newMessage, chatId: selectedChat._id}, {headers: {'Authorization' :`Bearer ${token}`}})
       setNewMessage('')
       setMessages([...messages, data])
+      socket.emit('new message', data)
     } catch (error) {
       console.log('errror sending message asejdfflsjd')
     }    

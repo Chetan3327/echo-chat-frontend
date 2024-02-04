@@ -2,9 +2,7 @@ CRITICAL
 on fresh login, chat item error ._id is undefined
 
 MESSAGES
-send messages
 scroll messages
-real time 
 typing...
 
 GROUPS
