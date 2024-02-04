@@ -1,9 +1,20 @@
-add or remove participants
-rename groups
-send messages
+CRITICAL
+on fresh login, chat item error ._id is undefined
 
+MESSAGES
+send messages
+scroll messages
+real time 
+typing...
+
+GROUPS
+rename groups
+add or remove participants
+
+MISC
 update profile
 
+EXPLORE
 explore tab
 feed
 stories

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import ProfileIcon from '../ProfileIcon'
 import axios from 'axios'
 import { ChatContext } from '@/context/userContext'
-import { IoCloseOutline, IoSearchOutline } from "react-icons/io5";
+import { IoChevronBackOutline, IoCloseOutline, IoSearchOutline } from "react-icons/io5";
 
 const ChatItem = ({item, addUser}) => {
   return (
@@ -66,8 +66,11 @@ const Group = ({setActiveTab}) => {
   return (
     <div className='bg-primary w-[30%] rounded-lg border border-primary'>
 
-      <div className='flex gap-3 px-5 py-5 items-baseline justify-between'>
-        <h3 className='font-semibold text-xl'>Create Group</h3>
+      <div className='flex gap-3 px-5 py-5 items-center justify-between'>
+        <div className='flex gap-2'>
+          <button onClick={() => setActiveTab('contact')} className='bg-graybg p-1 px-2 rounded-md'><IoChevronBackOutline /></button>
+          <h3 className='font-semibold text-xl'>Create Group</h3>
+        </div>
         <button onClick={() => createGroup()} className='bg-accent px-4 p-1.5 rounded-md text-sm hover:bg-accent/90'>Create</button>
       </div>
       <div className='w-full flex flex-col gap-3 px-3'>

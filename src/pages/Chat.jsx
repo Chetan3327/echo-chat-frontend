@@ -20,7 +20,7 @@ const Chat = () => {
           {activeTab === 'contact' && (<Contact setActiveTab={setActiveTab} />)}
           {activeTab === 'setting' && (<Setting />)}
           {activeTab === 'group' && (<Group setActiveTab={setActiveTab} />)}
-          {activeTab === 'info' && (<Info />)}
+          {activeTab === 'info' && (<Info setActiveTab={setActiveTab} />)}
           {/* <Contact /> */}
           <ChatWindow activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>

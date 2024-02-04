@@ -10,7 +10,8 @@ const senderName = (users, user) => {
   return users[0].name
 }
 
-const ChatItem = ({chat, user, setSelectedChat, active}) => {
+const ChatItem = ({chat, user, setSelectedChat, selectedChat}) => {
+  const active = selectedChat ? (selectedChat._id === chat._id): false;
   return (
     <>
       <div onClick={() => setSelectedChat(chat)} className={`${active ? 'bg-graybg': ''} flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer`}>
@@ -53,7 +54,7 @@ const Inbox = () => {
       {chats && 
       (<div>
         {chats.map((chat) => {
-          return (<ChatItem key={chat._id} chat={chat} user={user} active={selectedChat?._id === chat?._id} setSelectedChat={setSelectedChat} />)
+          return (<ChatItem key={chat._id} chat={chat} user={user} selectedChat={selectedChat} setSelectedChat={setSelectedChat} />)
         })}
       </div>)}
     </div>

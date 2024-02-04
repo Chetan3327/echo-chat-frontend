@@ -1,6 +1,7 @@
 import { ChatContext } from '@/context/userContext'
 import React, { useContext } from 'react'
 import ProfileIcon from '../ProfileIcon'
+import { IoChevronBackOutline } from 'react-icons/io5'
 
 const SettingItem = ({info, value}) => {
   return (
@@ -40,14 +41,15 @@ const ChatItem = ({pic, name, email, userId, adminId}) => {
   )
 }
 
-const Info = () => {
+const Info = ({setActiveTab}) => {
   const {user, selectedChat} = useContext(ChatContext)
   console.log('selectedChat')
   console.log(selectedChat)
   if(selectedChat.isGroupChat){
     return(
       <div className='bg-primary w-[30%] rounded-lg border border-primary'>
-        <div className='flex gap-3 px-5 py-5 items-baseline'>
+        <div className='flex gap-3 px-5 py-5 items-center'>
+          <button onClick={() => setActiveTab('chat')} className='bg-graybg p-1 rounded-md'><IoChevronBackOutline /></button>
           <h3 className='font-semibold text-xl'>Info</h3>
         </div>
         <div className='flex justify-center'>
@@ -69,6 +71,7 @@ const Info = () => {
     return (
       <div className='bg-primary w-[30%] rounded-lg border border-primary'>
         <div className='flex gap-3 px-5 py-5 items-baseline'>
+          <button onClick={() => setActiveTab('chat')} className='bg-graybg p-1 rounded-md'><IoChevronBackOutline /></button>
           <h3 className='font-semibold text-xl'>Info</h3>
         </div>
         <div className='flex justify-center'>
