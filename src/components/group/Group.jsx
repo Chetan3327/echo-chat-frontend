@@ -4,6 +4,8 @@ import axios from 'axios'
 import { ChatContext } from '@/context/userContext'
 import { IoChevronBackOutline, IoCloseOutline, IoSearchOutline } from "react-icons/io5";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
 const ChatItem = ({item, addUser}) => {
   return (
     <>
@@ -33,7 +35,7 @@ const Group = ({setActiveTab}) => {
     if(!searchTerm){
       return
     }
-    axios.get(`http://localhost:5000/api/user?search=${searchTerm}`, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
+    axios.get(`${BACKEND_URL}/api/user?search=${searchTerm}`, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
       // console.log(response)
       setUserList(response.data)
     })
@@ -43,7 +45,7 @@ const Group = ({setActiveTab}) => {
     if(users.length < 2) return
     const usersIds = users.map((item) => item._id)
 
-    axios.post(`http://localhost:5000/api/chat/createGroup`, {groupName, users: JSON.stringify(usersIds)}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
+    axios.post(`${BACKEND_URL}/api/chat/createGroup`, {groupName, users: JSON.stringify(usersIds)}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
       console.log(response)
       // setUserList(response.data)
       if(!chats.find((c) => c._id === response.data._id)) setChats([response.data, ...chats])

@@ -5,6 +5,8 @@ import { IoChevronBackOutline } from 'react-icons/io5'
 import { FaEdit } from 'react-icons/fa'
 import axios from 'axios'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
 const SettingItem = ({info, value}) => {
   return (
     <>
@@ -52,13 +54,12 @@ const Info = ({setActiveTab}) => {
 
   const renameGroup = () => {
     if(!newGroupName) return
-    axios.put(`http://localhost:5000/api/chat/renameGroup`, {chatId: selectedChat._id, newGroupName}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
+    axios.put(`${BACKEND_URL}/api/chat/renameGroup`, {chatId: selectedChat._id, newGroupName}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
       console.log(response)
       setSelectedChat(response.data)
       setUpdateingName(false)
     })
   }
-  console.log(selectedChat)
   if(selectedChat.isGroupChat){
     return(
       <div className='bg-primary w-[30%] rounded-lg border border-primary'>

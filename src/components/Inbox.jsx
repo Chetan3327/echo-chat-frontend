@@ -3,6 +3,8 @@ import ProfileIcon from './ProfileIcon'
 import { ChatContext } from '@/context/userContext'
 import axios from 'axios'
 
+const BACKEND_URL = 'http://localhost:5000'
+
 const senderName = (users, user) => {
   if(users[0]._id === user._id){
     return users[1].name
@@ -30,7 +32,7 @@ const ChatItem = ({chat, user, setSelectedChat, selectedChat}) => {
 const Inbox = () => {
   const {user, token, chats, setChats, selectedChat, setSelectedChat} = useContext(ChatContext)
   const fetchChats = async () => {
-    const {data} = await axios.get('http://localhost:5000/api/chat', {headers: {'Authorization' :`Bearer ${token}`}})
+    const {data} = await axios.get(`${BACKEND_URL}/api/chat`, {headers: {'Authorization' :`Bearer ${token}`}})
     setChats(data)
   }
   useEffect(() => {

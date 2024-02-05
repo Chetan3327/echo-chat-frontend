@@ -7,6 +7,8 @@ import { ChatContext } from '@/context/userContext';
 import axios from 'axios';
 import io from 'socket.io-client'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
 const senderName = (users, user) => {
   if(users[0]._id === user._id){
     return users[1].name
@@ -16,7 +18,6 @@ const senderName = (users, user) => {
 
 const ChatHeader = ({selectedChat, user, activeTab, setActiveTab}) => {
   const handleToggle = () => {
-    console.log('object')
     if(activeTab === 'chat'){
       setActiveTab('info')
     }else{
@@ -68,7 +69,6 @@ const Controls = ({newMessage, handleMessageInput, handleKeyDown, sendMessage}) 
   )
 }
 
-const BACKEND_URL = 'http://localhost:5000'
 var socket, selectedChatCompare;
 
 const ChatWindow = ({activeTab, setActiveTab}) => {
@@ -91,7 +91,7 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
   const fetchMessages = async () => {
     if(!selectedChat) return
     try {
-      const {data} = await axios.get(`http://localhost:5000/api/message/${selectedChat._id}`, {headers: {'Authorization' :`Bearer ${token}`}})
+      const {data} = await axios.get(`${BACKEND_URL}/api/message/${selectedChat._id}`, {headers: {'Authorization' :`Bearer ${token}`}})
       setMessages(data)      
       console.log('chat messages: ')
       console.log(data)
@@ -104,8 +104,6 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
   }
   useEffect(() => {
     socket = io(BACKEND_URL)
-    console.log('io client conncted')
-    console.log('user', user)
     socket.emit('setup', user)
     socket.on('connected', () => {
       setSocketConnected(true)
@@ -130,8 +128,6 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
 
 
   const sendMessage = async () => {
-    console.log('send message')
-    console.log(selectedChat)
     try {
       const {data} = await axios.post(`http://localhost:5000/api/message`, {content: newMessage, chatId: selectedChat._id}, {headers: {'Authorization' :`Bearer ${token}`}})
       setNewMessage('')

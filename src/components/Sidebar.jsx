@@ -38,7 +38,6 @@ const SideBarItems = [
 
 const Sidebar = ({small = false, setSmall, setActiveTab, activeTab}) => {
   const {user} = useContext(ChatContext)
-  // console.log(user)
   return (
     <div className={`flex flex-col bg-primary ${small ? 'w-[5vw]' : 'w-[20vw]'} rounded-lg justify-between duration-500`}>
       <div>

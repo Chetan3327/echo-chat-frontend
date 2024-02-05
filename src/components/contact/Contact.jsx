@@ -4,6 +4,8 @@ import axios from 'axios'
 import { ChatContext } from '@/context/userContext'
 import { IoSearchOutline } from "react-icons/io5";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
 const ChatItem = ({pic, name, email, userId, accessChat}) => {
   return (
     <>
@@ -27,13 +29,13 @@ const Contact = ({setActiveTab}) => {
     if(!searchTerm){
       return
     }
-    axios.get(`http://localhost:5000/api/user?search=${searchTerm}`, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
+    axios.get(`${BACKEND_URL}/api/user?search=${searchTerm}`, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
       // console.log(response)
       setUserList(response.data)
     })
   }
   const accessChat = (userId) => {
-    axios.post(`http://localhost:5000/api/chat`, {userId}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
+    axios.post(`${BACKEND_URL}/api/chat`, {userId}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
       console.log(response)
       // setUserList(response.data)
       if(!chats.find((c) => c._id === response.data._id)) setChats([response.data, ...chats])

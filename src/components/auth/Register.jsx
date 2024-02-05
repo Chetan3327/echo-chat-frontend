@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const Register = () => {
   const navigate = useNavigate()
   const [name, setName] = useState("")
@@ -9,8 +10,7 @@ const Register = () => {
   const [password, setPassword] = useState("")
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post(`http://localhost:5000/api/user/register`, {name, email, password}).then((response) => {
-      console.log(response.data)
+    axios.post(`${BACKEND_URL}/api/user/register`, {name, email, password}).then((response) => {
       localStorage.setItem('userInfo', JSON.stringify(response.data))
       navigate('/chat')
     }).catch((error) => {

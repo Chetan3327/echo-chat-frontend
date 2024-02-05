@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 
 export const ChatContext = createContext(null)
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
 const ChatContextProvider = (props) => {
     const [allInfo, setAllInfo] = useState(null)
     const [user, setUser] = useState(null)
@@ -21,7 +23,7 @@ const ChatContextProvider = (props) => {
         }
     }, [navigate])
 
-    const contextValue = {allInfo, user, setUser, token, selectedChat, setSelectedChat, chats, setChats}
+    const contextValue = {allInfo, user, setUser, token, selectedChat, setSelectedChat, chats, setChats, BACKEND_URL}
     return(
         <ChatContext.Provider value={contextValue}>
             {props.children}
