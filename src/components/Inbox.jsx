@@ -3,7 +3,7 @@ import ProfileIcon from './ProfileIcon'
 import { ChatContext } from '@/context/userContext'
 import axios from 'axios'
 
-const BACKEND_URL = 'http://localhost:5000'
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const senderName = (users, user) => {
   console.log(users[0]._id)
