@@ -27,7 +27,7 @@ const ChatItem = ({chat, user, setSelectedChat, selectedChat}) => {
   console.log('chat', chat)
   return (
     <>
-      <div onClick={() => setSelectedChat(chat)} className={`${active ? 'bg-graybg': ''} flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer`}>
+      <div onClick={() => setSelectedChat(chat)} className={`${active ? 'bg-graybg': ''} pl-6 flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer`}>
         {chat.isGroupChat ? (<ProfileIcon name={chat.chatName} />): (<ProfileIcon pic={getSenderUser(chat.users, user)?.pic} name={getSenderUser(chat.users, user)?.name} />)}
         <div>
           <span>{chat.isGroupChat ? chat.chatName : senderName(chat.users, user)}</span>
@@ -62,7 +62,7 @@ const Inbox = () => {
       </div>
 
       {chats && user && 
-      (<div>
+      (<div className='overflow-auto h-[33rem]'>
         {chats.map((chat) => {
           return (<ChatItem key={chat._id} chat={chat} user={user} selectedChat={selectedChat} setSelectedChat={setSelectedChat} />)
         })}
