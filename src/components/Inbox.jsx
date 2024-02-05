@@ -6,6 +6,8 @@ import axios from 'axios'
 const BACKEND_URL = 'http://localhost:5000'
 
 const senderName = (users, user) => {
+  console.log(users[0]._id)
+  console.log(user._id)
   if(users[0]._id === user._id){
     return users[1].name
   }
@@ -51,7 +53,7 @@ const Inbox = () => {
         <button className='w-full py-1 cursor-pointer'>Archived</button>
       </div>
 
-      {chats && 
+      {chats && user && 
       (<div>
         {chats.map((chat) => {
           return (<ChatItem key={chat._id} chat={chat} user={user} selectedChat={selectedChat} setSelectedChat={setSelectedChat} />)
