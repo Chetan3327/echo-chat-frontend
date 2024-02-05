@@ -49,8 +49,8 @@ const Info = ({setActiveTab}) => {
   const {user, token, selectedChat, setSelectedChat} = useContext(ChatContext)
   const [updatingName, setUpdateingName] = useState(false)
   const [newGroupName, setnewGroupName] = useState(selectedChat.chatName)
-  const admin = user._id === selectedChat.groupAdmin._id
-  console.log('admin', admin)
+  // const admin = user._id === selectedChat?.groupAdmin?._id
+  // console.log('admin', admin)
 
   const renameGroup = () => {
     if(!newGroupName) return
@@ -61,6 +61,7 @@ const Info = ({setActiveTab}) => {
     })
   }
   if(selectedChat.isGroupChat){
+    const admin = user._id === selectedChat.groupAdmin._id
     return(
       <div className='bg-primary w-[30%] rounded-lg border border-primary'>
         <div className='flex gap-3 px-5 py-5 items-center'>
@@ -108,7 +109,7 @@ const Info = ({setActiveTab}) => {
           <h3 className='font-semibold text-xl'>Info</h3>
         </div>
         <div className='flex justify-center'>
-          <ProfileIcon name={otherUser?.name} />
+          <ProfileIcon pic={otherUser?.pic} name={otherUser?.name} size={100} />
         </div>
         <div>
           <SettingItem info='Name' value={otherUser?.name} />

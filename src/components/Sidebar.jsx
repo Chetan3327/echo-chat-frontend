@@ -10,9 +10,10 @@ const SideBarItem = ({name, icon: IconComponent, active, small, setActiveTab}) =
 }
 
 const SideBarTitle = ({small, user, setActiveTab}) => {
+  console.log(user)
   return(
     <div className='px-5 flex gap-4 py-10 items-center'>
-      {user && (<span onClick={() => setActiveTab('setting')} className='cursor-pointer flex'><ProfileIcon name={user.name} /></span>)}
+      {user && (<span onClick={() => setActiveTab('setting')} className='cursor-pointer flex'><ProfileIcon pic={user.pic} name={user.name} size={40} /></span>)}
       {!small && <span className='font-semibold'>{user.name}</span>}
     </div>
   )

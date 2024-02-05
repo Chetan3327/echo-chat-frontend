@@ -14,13 +14,21 @@ const senderName = (users, user) => {
   return users[0].name
 }
 
+const getSenderUser = (users, user) => {
+  if(users[0]._id === user._id){
+    return users[1]
+  }
+  return users[0]
+}
+
 const ChatItem = ({chat, user, setSelectedChat, selectedChat}) => {
   const active = selectedChat ? (selectedChat._id === chat._id): false;
   const latestMessageContent = chat.latestMessage ? (chat.isGroupChat ? chat.latestMessage.sender.name + ': ' + chat.latestMessage.content : chat.latestMessage.content) : '';
+  console.log('chat', chat)
   return (
     <>
       <div onClick={() => setSelectedChat(chat)} className={`${active ? 'bg-graybg': ''} flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer`}>
-        <ProfileIcon />
+        {chat.isGroupChat ? (<ProfileIcon name={chat.chatName} />): (<ProfileIcon pic={getSenderUser(chat.users, user)?.pic} name={getSenderUser(chat.users, user)?.name} />)}
         <div>
           <span>{chat.isGroupChat ? chat.chatName : senderName(chat.users, user)}</span>
           <p className='text-sm text-gray-300'>{latestMessageContent}</p>

@@ -1,5 +1,5 @@
-CRITICAL
-on fresh login at inbox at chatItem ._id is undefined
+RESPONSIVENESS
+can render either chatwindow or inbox on small devices
 
 DARK MODE
 

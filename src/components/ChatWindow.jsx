@@ -16,7 +16,15 @@ const senderName = (users, user) => {
   return users[0].name
 }
 
+const getSenderUser = (users, user) => {
+  if(users[0]._id === user._id){
+    return users[1]
+  }
+  return users[0]
+}
+
 const ChatHeader = ({selectedChat, user, activeTab, setActiveTab}) => {
+  const otherUser = getSenderUser(selectedChat.users, user)
   const handleToggle = () => {
     if(activeTab === 'chat'){
       setActiveTab('info')
@@ -28,7 +36,7 @@ const ChatHeader = ({selectedChat, user, activeTab, setActiveTab}) => {
     <div className='flex justify-between items-center'>
 
       <div className='flex gap-3 items-center px-5 py-2'>
-        <ProfileIcon />
+        <ProfileIcon pic={otherUser?.pic} name={otherUser?.name} />
         <div className='flex flex-col'>
           <span className=''>{selectedChat.isGroupChat ? selectedChat.chatName : senderName(selectedChat.users, user)}</span>
           <span className='text-sm text-gray-300'>online</span>

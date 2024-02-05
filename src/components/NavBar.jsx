@@ -15,7 +15,7 @@ const NavBar = ({setActiveTab}) => {
 
         <div className='flex gap-7 items-center'>
           {/* <button className='flex items-center gap-3 bg-accent px-4 p-2 rounded-md'><FaPlus /> New Chat</button> */}
-          <Mode />
+          {/* <Mode /> */}
           <span className=' cursor-pointer'>
             <IoMdNotificationsOutline size={25} />
           </span>
