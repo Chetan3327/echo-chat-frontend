@@ -129,7 +129,7 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
 
   const sendMessage = async () => {
     try {
-      const {data} = await axios.post(`http://localhost:5000/api/message`, {content: newMessage, chatId: selectedChat._id}, {headers: {'Authorization' :`Bearer ${token}`}})
+      const {data} = await axios.post(`${BACKEND_URL}/api/message`, {content: newMessage, chatId: selectedChat._id}, {headers: {'Authorization' :`Bearer ${token}`}})
       setNewMessage('')
       setMessages([...messages, data])
       socket.emit('new message', data)
