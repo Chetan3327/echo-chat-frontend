@@ -155,7 +155,7 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
   }
 
   return (
-    <div className={`bg-primary p-5 rounded-lg flex flex-col ${smallDevice ? (selectedChat ? 'w-full' : 'hidden' ) : 'w-[80%]'}`}>
+    <div className={`bg-primary p-5 rounded-lg flex flex-col ${smallDevice ? (selectedChat ? 'w-full' : 'hidden' ) : 'w-full'}`}>
       {selectedChat ? 
       (<>
         <ChatHeader activeTab={activeTab} setActiveTab={setActiveTab} selectedChat={selectedChat} setSelectedChat={setSelectedChat} user={user} />

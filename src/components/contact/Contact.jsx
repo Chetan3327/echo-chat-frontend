@@ -22,7 +22,7 @@ const ChatItem = ({pic, name, email, userId, accessChat}) => {
 }
 
 const Contact = ({setActiveTab}) => {
-  const {user, token, setSelectedChat, chats, setChats} = useContext(ChatContext)
+  const {user, token, selectedChat, setSelectedChat, chats, setChats, smallDevice} = useContext(ChatContext)
   const [searchTerm, setSearchTerm] = useState('')
   const [userList, setUserList] = useState(null)
   const findUsers = () => {
@@ -42,7 +42,7 @@ const Contact = ({setActiveTab}) => {
     })
   }
   return (
-    <div className='bg-primary w-[30%] rounded-lg border border-primary'>
+    <div className={`bg-primary w-[30%] rounded-lg border border-primary ${smallDevice ? (selectedChat ? 'hidden' : 'w-full') : 'w-[30%]'}`}>
 
       <div className='flex gap-3 px-5 py-5 items-start justify-between'>
         <h3 className='font-semibold text-xl'>Contact</h3>

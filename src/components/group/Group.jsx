@@ -26,7 +26,7 @@ const UserItem = ({item, removeUser}) => {
 }
 
 const Group = ({setActiveTab}) => {
-  const {user, token, setSelectedChat, chats, setChats} = useContext(ChatContext)
+  const {user, token, selectedChat, setSelectedChat, chats, setChats, smallDevice} = useContext(ChatContext)
   const [groupName, setGroupName] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [users, setUsers] = useState([])
@@ -62,7 +62,7 @@ const Group = ({setActiveTab}) => {
     setUsers(filteredUsers)
   }
   return (
-    <div className='bg-primary w-[30%] rounded-lg border border-primary'>
+    <div className={`bg-primary rounded-lg border border-primary ${smallDevice ? (selectedChat ? 'hidden' : 'w-full') : 'w-[30%]'}`}>
 
       <div className='flex gap-3 px-5 py-5 items-center justify-between'>
         <div className='flex gap-2'>
