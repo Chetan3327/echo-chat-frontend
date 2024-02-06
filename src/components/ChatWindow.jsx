@@ -36,7 +36,7 @@ const ChatHeader = ({selectedChat, setSelectedChat, user, activeTab, setActiveTa
     <div className='flex justify-between items-center'>
       <div className='flex gap-3 items-center py-2'>
         <button onClick={() => setSelectedChat(null)} className='bg-graybg p-2 rounded-md'><IoChevronBackOutline /></button>
-        <ProfileIcon pic={otherUser?.pic} name={otherUser?.name} />
+        <ProfileIcon pic={selectedChat.isGroupChat ? '' : otherUser?.pic} name={selectedChat.isGroupChat ? selectedChat?.chatName : otherUser?.name} />
         <div className='flex flex-col'>
           <span className=''>{selectedChat.isGroupChat ? selectedChat.chatName : senderName(selectedChat.users, user)}</span>
           <span className='text-sm text-gray-300'>online</span>

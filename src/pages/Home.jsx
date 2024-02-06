@@ -16,7 +16,7 @@ const Home = () => {
       {/* <div>
         <h2 className='font-semibold text-3xl'>Welcome.</h2>
       </div> */}
-      <div className='bg-primary p-10 w-[90vw] md:w-[30vw] rounded-lg'>
+      <div className='bg-primary p-10 w-[90vw] lg:w-[30vw] rounded-lg'>
         <Tabs defaultValue="login" className="w-full">
           <TabsList>
             <TabsTrigger value="signup">SignUp</TabsTrigger>
