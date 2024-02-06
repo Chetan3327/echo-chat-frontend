@@ -35,6 +35,25 @@ const ChatContextProvider = (props) => {
         }
     }, [])
 
+    useEffect(() => {
+        const theme = localStorage.getItem('preferedTheme') || 'dark'
+        if(theme === 'light'){
+            document.documentElement.style.setProperty('--primary', "#fcfdff");
+            document.documentElement.style.setProperty('--secondary', "#c4c5c6");
+            document.documentElement.style.setProperty('--graybg', "#b0b1b2");
+            document.documentElement.style.setProperty('--maintext', "#000");
+            document.documentElement.style.setProperty('--hover', "#e0e4e5");
+            document.documentElement.style.setProperty('--textsecondary', "#6a6a6a");
+        }else{
+            document.documentElement.style.setProperty('--primary', "#23262f");
+            document.documentElement.style.setProperty('--secondary', "#3b3e46");
+            document.documentElement.style.setProperty('--graybg', "#3b3e46");
+            document.documentElement.style.setProperty('--maintext', "#fff");
+            document.documentElement.style.setProperty('--hover', "#3b3e46");
+            document.documentElement.style.setProperty('--textsecondary', "#a1a2a4");
+        }
+    }, [])
+
     const contextValue = {allInfo, user, setUser, token, selectedChat, setSelectedChat, chats, setChats, BACKEND_URL, smallDevice}
     return(
         <ChatContext.Provider value={contextValue}>

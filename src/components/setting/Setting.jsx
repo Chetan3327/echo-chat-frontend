@@ -13,7 +13,7 @@ const SettingItem = ({info, value}) => {
     <>
       <div className='flex gap-5 items-center px-5 py-1 cursor-pointer'>
         <div>
-          <span className='text-sm text-gray-100'>{info}</span>
+          <span className='text-sm text-textsecondary'>{info}</span>
           <p>{value}</p>
         </div>
       </div>

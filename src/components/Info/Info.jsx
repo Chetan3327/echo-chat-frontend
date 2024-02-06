@@ -12,7 +12,7 @@ const SettingItem = ({info, value}) => {
     <>
       <div className='flex gap-5 items-center px-5 py-1 cursor-pointer'>
         <div>
-          <span className='text-sm text-gray-100'>{info}</span>
+          <span className='text-sm text-textsecondary'>{info}</span>
           <p>{value}</p>
         </div>
       </div>
@@ -30,12 +30,12 @@ const getSenderUser = (users, user) => {
 const ChatItem = ({pic, name, email, userId, adminId}) => {
   return (
     <>
-      <div className='flex items-center justify-between px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer'>
+      <div className='flex items-center justify-between px-5 py-3 hover:bg-hover hover:duration-300 cursor-pointer'>
         <div className='flex gap-5 items-center'>
           <ProfileIcon name={name} />
           <div>
             <span>{name}</span>
-            <p className='text-sm text-gray-100'>{email}</p>
+            <p className='text-sm text-textsecondary'>{email}</p>
           </div>
         </div>
         {userId === adminId && (<span className='text-sm text-gray-400'>Admin</span>)}
@@ -71,11 +71,11 @@ const Info = ({setActiveTab}) => {
 
         <div className='flex gap-5 items-center px-5 py-1'>
           <div>
-            <span className='text-sm text-gray-100'>Name</span>
+            <span className='text-sm text-textsecondary'>Name</span>
             {!updatingName ? 
-            (<p className='flex gap-2 items-center'>{selectedChat?.chatName}<span onClick={() => setUpdateingName(true)} className='text-sm cursor-pointer text-gray-300'><FaEdit /></span></p>) : 
+            (<p className='flex gap-2 items-center'>{selectedChat?.chatName}<span onClick={() => setUpdateingName(true)} className='text-sm cursor-pointer text-textsecondary'><FaEdit /></span></p>) : 
             (<div className='w-full flex gap-2'>
-              <input value={newGroupName} onChange={(e) => setnewGroupName(e.target.value)} className='w-full bg-secondary text-gray-300 outline-none p-0.5 px-1 rounded-md' autoFocus type="text" />
+              <input value={newGroupName} onChange={(e) => setnewGroupName(e.target.value)} className='w-full bg-secondary text-textsecondary outline-none p-0.5 px-1 rounded-md' autoFocus type="text" />
               <button onClick={() => renameGroup()} className='bg-accent px-2 p-1 rounded-md hover:bg-accent/90'>update</button>
             </div>)}
             

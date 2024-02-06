@@ -11,7 +11,7 @@ const Chat = () => {
   const [activeTab, setActiveTab] = useState('chat')
   const [small, setSmall] = useState(true)
   return (
-    <div className='flex min-h-screen bg-secondary text-white p-5 gap-5'>
+    <div className='flex min-h-screen bg-secondary p-5 gap-5'>
       <Sidebar setActiveTab={setActiveTab} activeTab={activeTab} small={small} setSmall={setSmall} />
       <div className='w-full flex flex-col gap-5'>
         <NavBar setActiveTab={setActiveTab} />

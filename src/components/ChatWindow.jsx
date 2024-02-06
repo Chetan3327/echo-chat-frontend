@@ -39,15 +39,15 @@ const ChatHeader = ({selectedChat, setSelectedChat, user, activeTab, setActiveTa
         <ProfileIcon pic={selectedChat.isGroupChat ? '' : otherUser?.pic} name={selectedChat.isGroupChat ? selectedChat?.chatName : otherUser?.name} />
         <div className='flex flex-col'>
           <span className=''>{selectedChat.isGroupChat ? selectedChat.chatName : senderName(selectedChat.users, user)}</span>
-          <span className='text-sm text-gray-300'>online</span>
-          {/* <span className='text-sm text-gray-300'>Chetan is Typing...</span> */}
+          <span className='text-sm text-textsecondary'>online</span>
+          {/* <span className='text-sm text-textsecondary'>Chetan is Typing...</span> */}
         </div>
       </div>
 
       <div className='px-5 py-2 flex gap-5'>
-        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'><IoVideocamOutline size={20} /></button>
-        <button className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'><IoCallOutline size={20} /></button>
-        <button onClick={() => handleToggle()} className='bg-[#3b3e46] p-2 px-3 rounded-md hover:bg-[#373a41] hover:duration-300'>{activeTab === 'chat' ? <IoOptionsOutline size={20} /> : <IoCloseOutline size={20} />}</button>
+        <button className='bg-secondary p-2 px-3 rounded-md hover:bg-hover hover:duration-300'><IoVideocamOutline size={20} /></button>
+        <button className='bg-secondary p-2 px-3 rounded-md hover:bg-hover hover:duration-300'><IoCallOutline size={20} /></button>
+        <button onClick={() => handleToggle()} className='bg-secondary p-2 px-3 rounded-md hover:bg-hover hover:duration-300'>{activeTab === 'chat' ? <IoOptionsOutline size={20} /> : <IoCloseOutline size={20} />}</button>
       </div>
 
     </div>
@@ -60,7 +60,7 @@ const Message = ({content, left, time}) => {
     <div className={`px-5 py-2 my-1 flex ${left ? 'justify-start' : 'justify-end'}`}>
       <div className={`flex flex-col gap-1 ${left ? 'items-start' : 'items-end'}`}>
         <span className='bg-primary px-5 py-2 rounded-sm'>{content}</span>
-        <span className='text-sm text-gray-300 flex gap-2 items-center pl-2'>{timeString} <span className='text-accent'><LiaCheckDoubleSolid /></span></span>
+        <span className='text-sm text-textsecondary flex gap-2 items-center pl-2'>{timeString} <span className='text-accent'><LiaCheckDoubleSolid /></span></span>
       </div>
     </div>
   )
@@ -159,13 +159,13 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
       {selectedChat ? 
       (<>
         <ChatHeader activeTab={activeTab} setActiveTab={setActiveTab} selectedChat={selectedChat} setSelectedChat={setSelectedChat} user={user} />
-        <div className='bg-[#3b3e46] h-full rounded-lg p-5 flex flex-col justify-between'>
+        <div className='bg-hover h-full rounded-lg p-5 flex flex-col justify-between'>
           {messages.length > 0 ? 
           (<div className='mb-4 overflow-auto h-[29.5rem] no-scrollbar' ref={messagesContainerRef}>
             {messages.map((message) => {
               return (<Message key={message._id} content={message.content} left={message.sender._id != user._id} time={message.updatedAt} />)
             })}
-          </div>):(<div className='flex justify-center items-center h-full text-gray-300'>No messages</div>)}
+          </div>):(<div className='flex justify-center items-center h-full text-textsecondary'>No messages</div>)}
 
           <Controls newMessage={newMessage} handleMessageInput={handleMessageInput} handleKeyDown={handleKeyDown} sendMessage={sendMessage} />
         </div>

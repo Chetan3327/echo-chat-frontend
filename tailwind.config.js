@@ -23,14 +23,28 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "#4d4e56",
         foreground: "hsl(var(--foreground))",
-        graybg: '#3b3e46',
+        maintext: {
+          DEFAULT: "var(--maintext, #000)",
+          foreground: "hsl(var(--maintext-foreground))",
+        },
+        graybg: {
+          DEFAULT: "var(--graybg, #b0b1b2)",
+          foreground: "hsl(var(--graybg-foreground))",
+        },
+        hover: {
+          DEFAULT: "var(--hover, #e0e4e5)",
+          foreground: "hsl(var(--hover-foreground))",
+        },
+        textsecondary: {
+          DEFAULT: "var(--textsecondary, #d1d5db)",
+          foreground: "hsl(var(--textsecondary-foreground))",
+        },
         primary: {
-          // DEFAULT: "var(--primary, #23262f)",
-          DEFAULT: "#23262f",
+          DEFAULT: "var(--primary, #fcfdff)",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "#3b3e46",
+          DEFAULT: "var(--secondary, #c4c5c6)",
           foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {

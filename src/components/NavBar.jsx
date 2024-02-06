@@ -16,7 +16,7 @@ const NavBar = ({setActiveTab}) => {
     <div className='bg-primary flex justify-between p-3 px-5 rounded-lg items-center'>
 
         <h4 className='font-semibold text-2xl'>Chats</h4>
-        {/* <input onChange={() => setRandomColor()} className='bg-secondary text-gray-300 outline-none p-1 px-2 rounded-md w-[30%]' type="text" placeholder="what's on your mind?" /> */}
+        {/* <input onChange={() => setRandomColor()} className='bg-secondary text-textsecondary outline-none p-1 px-2 rounded-md w-[30%]' type="text" placeholder="what's on your mind?" /> */}
         <div className='flex gap-7 items-center'>
           {/* <button className='flex items-center gap-3 bg-accent px-4 p-2 rounded-md'><FaPlus /> New Chat</button> */}
           <Mode />

@@ -9,11 +9,11 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const ChatItem = ({item, addUser}) => {
   return (
     <>
-      <div onClick={() => addUser(item)} className='flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer'>
+      <div onClick={() => addUser(item)} className='flex gap-5 items-center px-5 py-3 hover:bg-hover hover:duration-300 cursor-pointer'>
         <ProfileIcon name={item?.name} />
         <div>
           <span>{item?.name}</span>
-          <p className='text-sm text-gray-100'>{item?.email}</p>
+          <p className='text-sm text-textsecondary'>{item?.email}</p>
         </div>
       </div>
       <hr className='h-px bg-gray-700 border-0 dark:bg-gray-700' />
@@ -72,7 +72,7 @@ const Group = ({setActiveTab}) => {
         <button onClick={() => createGroup()} className='bg-accent px-4 p-1.5 rounded-md text-sm hover:bg-accent/90'>Create</button>
       </div>
       <div className='w-full flex flex-col gap-3 px-3'>
-        <input onChange={(e) => setGroupName(e.target.value)} className='w-full bg-secondary text-gray-300 outline-none p-1 rounded-md' type="text" placeholder='Group Name' />
+        <input onChange={(e) => setGroupName(e.target.value)} className='w-full bg-secondary text-textsecondary outline-none p-1 rounded-md' type="text" placeholder='Group Name' />
 
         {users?.length > 0 && 
         (<div className='flex gap-3 flex-wrap'>
@@ -82,7 +82,7 @@ const Group = ({setActiveTab}) => {
         </div>)}
 
         <div className='w-full flex gap-2'>
-          <input onChange={(e) => setSearchTerm(e.target.value)} className='w-full bg-secondary text-gray-300 outline-none p-1 rounded-md' type="text" placeholder='Enter name or email' />
+          <input onChange={(e) => setSearchTerm(e.target.value)} className='w-full bg-secondary text-textsecondary outline-none p-1 rounded-md' type="text" placeholder='Enter name or email' />
           <button className='bg-accent px-2 p-1 rounded-md hover:bg-accent/90' onClick={() => findUsers()}><IoSearchOutline /></button>
         </div>
       </div>

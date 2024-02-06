@@ -9,11 +9,11 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const ChatItem = ({pic, name, email, userId, accessChat}) => {
   return (
     <>
-      <div onClick={() => accessChat(userId)} className='flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer'>
+      <div onClick={() => accessChat(userId)} className='flex gap-5 items-center px-5 py-3 hover:bg-hover hover:duration-300 cursor-pointer'>
         <ProfileIcon name={name} />
         <div>
           <span>{name}</span>
-          <p className='text-sm text-gray-100'>{email}</p>
+          <p className='text-sm text-textsecondary'>{email}</p>
         </div>
       </div>
       <hr className='h-px bg-gray-700 border-0 dark:bg-gray-700' />
@@ -49,7 +49,7 @@ const Contact = ({setActiveTab}) => {
         <button onClick={() => setActiveTab('group')} className='bg-accent px-4 p-1.5 rounded-md text-sm hover:bg-accent/90'>New Group</button>
       </div>
       <div className='w-full flex gap-2 px-3'>
-        <input onChange={(e) => setSearchTerm(e.target.value)} className='w-full bg-secondary text-gray-300 outline-none p-1 rounded-md' type="text" placeholder='Enter name or email' />
+        <input onChange={(e) => setSearchTerm(e.target.value)} className='w-full bg-secondary text-textsecondary outline-none p-1 rounded-md' type="text" placeholder='Enter name or email' />
         <button className='bg-accent px-2 p-1 rounded-md hover:bg-accent/90' onClick={() => findUsers()}><IoSearchOutline /></button>
       </div>
 

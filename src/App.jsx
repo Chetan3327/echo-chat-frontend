@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Router>
         <ChatContextProvider>
-        <div className='min-h-screen text-white bg-secondary font-mono'>
+        <div className='min-h-screen text-maintext bg-secondary font-mono'>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/chat' element={<Chat />} />
