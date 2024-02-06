@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import ProfileIcon from './ProfileIcon'
 import { LiaCheckDoubleSolid } from "react-icons/lia";
-import { IoVideocamOutline, IoCallOutline, IoCloseOutline, IoAttachOutline, IoMicOutline, IoOptionsOutline } from "react-icons/io5";
+import { IoVideocamOutline, IoCallOutline, IoCloseOutline, IoAttachOutline, IoMicOutline, IoOptionsOutline, IoChevronBackOutline } from "react-icons/io5";
 import { IoIosSend } from 'react-icons/io';
 import { ChatContext } from '@/context/userContext';
 import axios from 'axios';
@@ -23,7 +23,7 @@ const getSenderUser = (users, user) => {
   return users[0]
 }
 
-const ChatHeader = ({selectedChat, user, activeTab, setActiveTab}) => {
+const ChatHeader = ({selectedChat, setSelectedChat, user, activeTab, setActiveTab}) => {
   const otherUser = getSenderUser(selectedChat.users, user)
   const handleToggle = () => {
     if(activeTab === 'chat'){
@@ -34,8 +34,8 @@ const ChatHeader = ({selectedChat, user, activeTab, setActiveTab}) => {
   }
   return(
     <div className='flex justify-between items-center'>
-
-      <div className='flex gap-3 items-center px-5 py-2'>
+      <div className='flex gap-3 items-center py-2'>
+        <button onClick={() => setSelectedChat(null)} className='bg-graybg p-2 rounded-md'><IoChevronBackOutline /></button>
         <ProfileIcon pic={otherUser?.pic} name={otherUser?.name} />
         <div className='flex flex-col'>
           <span className=''>{selectedChat.isGroupChat ? selectedChat.chatName : senderName(selectedChat.users, user)}</span>
@@ -80,7 +80,7 @@ const Controls = ({newMessage, handleMessageInput, handleKeyDown, sendMessage}) 
 var socket, selectedChatCompare;
 
 const ChatWindow = ({activeTab, setActiveTab}) => {
-  const {user, selectedChat, token} = useContext(ChatContext)
+  const {user, selectedChat, setSelectedChat, token, smallDevice} = useContext(ChatContext)
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
   const [socketConnected, setSocketConnected] = useState(false)
@@ -101,8 +101,6 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
     try {
       const {data} = await axios.get(`${BACKEND_URL}/api/message/${selectedChat._id}`, {headers: {'Authorization' :`Bearer ${token}`}})
       setMessages(data)      
-      console.log('chat messages: ')
-      console.log(data)
 
       socket.emit('join chat', selectedChat._id)
     } catch (error) {
@@ -157,10 +155,10 @@ const ChatWindow = ({activeTab, setActiveTab}) => {
   }
 
   return (
-    <div className='bg-primary w-[80%] p-5 rounded-lg flex flex-col'>
+    <div className={`bg-primary p-5 rounded-lg flex flex-col ${smallDevice ? (selectedChat ? 'w-full' : 'hidden' ) : 'w-[80%]'}`}>
       {selectedChat ? 
       (<>
-        <ChatHeader activeTab={activeTab} setActiveTab={setActiveTab} selectedChat={selectedChat} user={user} />
+        <ChatHeader activeTab={activeTab} setActiveTab={setActiveTab} selectedChat={selectedChat} setSelectedChat={setSelectedChat} user={user} />
         <div className='bg-[#3b3e46] h-full rounded-lg p-5 flex flex-col justify-between'>
           {messages.length > 0 ? 
           (<div className='mb-4 overflow-auto h-[29.5rem] no-scrollbar' ref={messagesContainerRef}>

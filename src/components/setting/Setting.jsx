@@ -24,10 +24,8 @@ const SettingItem = ({info, value}) => {
 const Setting = () => {
   const {user, token, setUser} = useContext(ChatContext)
   const [selectedFile, setSelectedFile] = useState(null)
-  console.log(user)
   
   const uploadImage = () => {
-    console.log('uploading image')
     const data = new FormData()
     data.append("file", selectedFile)
     data.append("upload_preset", UPLOAD_PRESET)

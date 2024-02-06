@@ -30,14 +30,11 @@ const Contact = ({setActiveTab}) => {
       return
     }
     axios.get(`${BACKEND_URL}/api/user?search=${searchTerm}`, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
-      // console.log(response)
       setUserList(response.data)
     })
   }
   const accessChat = (userId) => {
     axios.post(`${BACKEND_URL}/api/chat`, {userId}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
-      console.log(response)
-      // setUserList(response.data)
       if(!chats.find((c) => c._id === response.data._id)) setChats([response.data, ...chats])
       
       setSelectedChat(response.data)

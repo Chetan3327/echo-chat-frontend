@@ -10,7 +10,6 @@ const SideBarItem = ({name, icon: IconComponent, active, small, setActiveTab}) =
 }
 
 const SideBarTitle = ({small, user, setActiveTab}) => {
-  console.log(user)
   return(
     <div className='px-5 flex gap-4 py-10 items-center'>
       {user && (<span onClick={() => setActiveTab('setting')} className='cursor-pointer flex'><ProfileIcon pic={user.pic} name={user.name} size={40} /></span>)}
@@ -40,7 +39,7 @@ const SideBarItems = [
 const Sidebar = ({small = false, setSmall, setActiveTab, activeTab}) => {
   const {user} = useContext(ChatContext)
   return (
-    <div className={`flex flex-col bg-primary ${small ? 'w-[5vw]' : 'w-[20vw]'} rounded-lg justify-between duration-500`}>
+    <div className={`flex flex-col bg-primary rounded-lg justify-between ${!small ? 'w-[20vw]' : ''} duration-300`}>
       <div>
         <SideBarTitle small={small} user={user} setActiveTab={setActiveTab} />
         

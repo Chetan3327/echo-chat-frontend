@@ -36,7 +36,6 @@ const Group = ({setActiveTab}) => {
       return
     }
     axios.get(`${BACKEND_URL}/api/user?search=${searchTerm}`, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
-      // console.log(response)
       setUserList(response.data)
     })
   }
@@ -46,7 +45,6 @@ const Group = ({setActiveTab}) => {
     const usersIds = users.map((item) => item._id)
 
     axios.post(`${BACKEND_URL}/api/chat/createGroup`, {groupName, users: JSON.stringify(usersIds)}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
-      console.log(response)
       // setUserList(response.data)
       if(!chats.find((c) => c._id === response.data._id)) setChats([response.data, ...chats])
       setSelectedChat(response.data)
@@ -54,8 +52,6 @@ const Group = ({setActiveTab}) => {
     })
   }
   const addUser = (usertoadd) => {
-    console.log(users)
-    console.log(usertoadd)
     if (!users.some(user => user._id === usertoadd._id)) {
       setUsers((users) => [...users, usertoadd]);
     }

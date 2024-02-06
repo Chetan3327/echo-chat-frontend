@@ -11,6 +11,7 @@ const ChatContextProvider = (props) => {
     const [token, setToken] = useState(null)
     const [selectedChat, setSelectedChat] = useState(null)
     const [chats, setChats] = useState(null)
+    const [smallDevice, setSmallDevice] = useState(false)
     const navigate = useNavigate()
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
@@ -23,7 +24,18 @@ const ChatContextProvider = (props) => {
         }
     }, [navigate])
 
-    const contextValue = {allInfo, user, setUser, token, selectedChat, setSelectedChat, chats, setChats, BACKEND_URL}
+    useEffect(() => {
+        if (smallDevice === false && window.innerWidth < 800) {
+            setSmallDevice(true)
+            console.log('small device', true)
+        }
+        else if  (smallDevice === true && window.innerWidth >= 800){
+            setSmallDevice(false)
+            console.log('small device', false)
+        }
+    }, [])
+
+    const contextValue = {allInfo, user, setUser, token, selectedChat, setSelectedChat, chats, setChats, BACKEND_URL, smallDevice}
     return(
         <ChatContext.Provider value={contextValue}>
             {props.children}

@@ -6,8 +6,6 @@ import axios from 'axios'
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const senderName = (users, user) => {
-  console.log(users[0]._id)
-  console.log(user._id)
   if(users[0]._id === user._id){
     return users[1].name
   }
@@ -24,7 +22,6 @@ const getSenderUser = (users, user) => {
 const ChatItem = ({chat, user, setSelectedChat, selectedChat}) => {
   const active = selectedChat ? (selectedChat._id === chat._id): false;
   const latestMessageContent = chat.latestMessage ? (chat.isGroupChat ? chat.latestMessage.sender.name + ': ' + chat.latestMessage.content : chat.latestMessage.content) : '';
-  console.log('chat', chat)
   return (
     <>
       <div onClick={() => setSelectedChat(chat)} className={`${active ? 'bg-graybg': ''} pl-6 flex gap-5 items-center px-5 py-3 hover:bg-[#3b3e46] hover:duration-300 cursor-pointer`}>
@@ -40,7 +37,7 @@ const ChatItem = ({chat, user, setSelectedChat, selectedChat}) => {
 }
 
 const Inbox = () => {
-  const {user, token, chats, setChats, selectedChat, setSelectedChat} = useContext(ChatContext)
+  const {user, token, chats, setChats, selectedChat, setSelectedChat, smallDevice} = useContext(ChatContext)
   const fetchChats = async () => {
     const {data} = await axios.get(`${BACKEND_URL}/api/chat`, {headers: {'Authorization' :`Bearer ${token}`}})
     setChats(data)
@@ -49,7 +46,7 @@ const Inbox = () => {
     if(token) fetchChats()
   }, [token])
   return (
-    <div className='bg-primary w-[30%] rounded-lg border border-primary'>
+    <div className={`bg-primary rounded-lg border border-primary ${smallDevice ? (selectedChat ? 'hidden' : 'w-full') : 'w-[30%]'}`}>
 
       <div className='flex gap-3 px-5 py-5 items-baseline'>
         <h3 className='font-semibold text-xl'>Inbox</h3>

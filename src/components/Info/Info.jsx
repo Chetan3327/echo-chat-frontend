@@ -49,13 +49,10 @@ const Info = ({setActiveTab}) => {
   const {user, token, selectedChat, setSelectedChat} = useContext(ChatContext)
   const [updatingName, setUpdateingName] = useState(false)
   const [newGroupName, setnewGroupName] = useState(selectedChat.chatName)
-  // const admin = user._id === selectedChat?.groupAdmin?._id
-  // console.log('admin', admin)
 
   const renameGroup = () => {
     if(!newGroupName) return
     axios.put(`${BACKEND_URL}/api/chat/renameGroup`, {chatId: selectedChat._id, newGroupName}, {headers: {'Authorization' :`Bearer ${token}`}}).then((response) => {
-      console.log(response)
       setSelectedChat(response.data)
       setUpdateingName(false)
     })
