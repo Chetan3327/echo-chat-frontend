@@ -24,7 +24,7 @@ const NavBar = ({setActiveTab}) => {
             <IoMdNotificationsOutline size={25} />
           </span>
 
-          {user && (<span onClick={() => setActiveTab('setting')} className='cursor-pointer flex'><ProfileIcon name={user.name} /></span>)}
+          {user && (<span onClick={() => setActiveTab('setting')} className='cursor-pointer flex'><ProfileIcon pic={user?.pic} name={user?.name} /></span>)}
 
         </div>
 
